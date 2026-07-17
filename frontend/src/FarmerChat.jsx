@@ -17,20 +17,19 @@ function FarmerChat({ lang = "en", userId = "" }) {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [replyLang, setReplyLang] = useState("en");
   const [selectedImage, setSelectedImage] = useState(null);
-  const {
-    transcript: speechText,
-    setTranscript: setSpeechText,
-    status: speechStatus,
-    error: speechError,
-    startListening,
-    stopListening,
-    finishListening,
-    isSupported: speechSupported
-  } = useFarmerSpeech(lang);
+const {
+  transcript: speechText,
+  status: speechStatus,
+  error: speechError,
+  startListening,
+  stopListening,
+  finishListening,
+  isSupported: speechSupported
+} = useFarmerSpeech(lang);
   const [selectedImageUrl, setSelectedImageUrl] = useState("");
   const [lastQuestion, setLastQuestion] = useState("");
   const [lastImageFile, setLastImageFile] = useState(null);
-  const [lastInputType, setLastInputType] = useState("");
+  // Removed unused state
 
   // Format response text as bullet points
   const formatReplyAsPoints = (text) => {
@@ -223,7 +222,7 @@ function FarmerChat({ lang = "en", userId = "" }) {
       // Store the last question and image for language switching
       setLastQuestion(text);
       setLastImageFile(imageFile);
-      setLastInputType(inputType);
+
 
       const shouldSpeak = opts.speakReply ?? false;
       if (shouldSpeak && typeof data.reply === "string" && data.reply.trim()) {

@@ -63,20 +63,22 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    // Listen for user activity
-    const events = ["mousedown", "keydown", "scroll", "touchstart"];
-    events.forEach((event) => {
-      window.addEventListener(event, handleUserActivity);
-    });
+ useEffect(() => {
+  // Listen for user activity
+  const events = ["mousedown", "keydown", "scroll", "touchstart"];
 
-    return () => {
-      events.forEach((event) => {
-        window.removeEventListener(event, handleUserActivity);
-      });
-      clearTimeout(inactivityTimeoutRef.current);
-    };
-  }, [isLoggedIn]);
+  events.forEach((event) => {
+    window.addEventListener(event, handleUserActivity);
+  });
+
+  return () => {
+    events.forEach((event) => {
+      window.removeEventListener(event, handleUserActivity);
+    });
+    clearTimeout(inactivityTimeoutRef.current);
+  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [isLoggedIn]);
 
   const toggleLang = () => {
     setLang((prev) => {

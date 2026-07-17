@@ -4,7 +4,6 @@ import styles from "./History.module.css";
 function History({ userId, lang = "en" }) {
   const [history, setHistory] = useState([]);
   const [filteredHistory, setFilteredHistory] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
@@ -73,10 +72,10 @@ function History({ userId, lang = "en" }) {
   useEffect(() => {
     loadHistory();
   }, []);
+useEffect(() => {
+  filterHistory();
 // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    filterHistory();
-  }, [history, searchTerm, selectedFilter]);
+}, [history, searchTerm, selectedFilter]);
 
   const loadHistory = () => {
     try {
