@@ -16,7 +16,6 @@ const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
  * (better than hammering one model that returns 429).
  */
 const DEFAULT_OPENROUTER_MODELS = [
-  "openrouter/free",
   "meta-llama/llama-3.1-8b-instruct:free",
   "meta-llama/llama-3.2-3b-instruct:free",
   "google/gemma-2-9b-it:free"
@@ -126,12 +125,25 @@ const isModelUnavailableError = (err) => {
   );
 };
 
+// const isBadModelReply = (text) => {
+//   const t = String(text || "").trim();
+//   if (!t) return true;
+//   return /^(404|429|502|503)\b|no endpoints found|provider returned error|invalid model/i.test(t);
+// };
 const isBadModelReply = (text) => {
-  const t = String(text || "").trim();
-  if (!t) return true;
-  return /^(404|429|502|503)\b|no endpoints found|provider returned error|invalid model/i.test(t);
-};
+  const t = String(text || "").trim().toLowerCase();
 
+  if (!t) return true;
+
+  return (
+    t.includes("user safety") ||
+    t.includes("content safety") ||
+    /^(404|429|502|503)/.test(t) ||
+    t.includes("no endpoints found") ||
+    t.includes("provider returned error") ||
+    t.includes("invalid model")
+  );
+};
 /**
  * Retries transient OpenRouter / network errors (especially 429 on free tier).
  */
