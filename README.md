@@ -240,6 +240,14 @@ For issues and questions:
 - [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API)
 - [Express.js Guide](https://expressjs.com)
 
+## 🌐 Live Demo
+
+**Frontend (Vercel):**
+https://farmer-advisory-system-py3qxjki2-dharshini17.vercel.app
+
+**Backend (Render):**
+https://farmer-advisory-system-a8s6.onrender.com
+
 ---
 
 Built with ❤️ for Indian farmers | Version 1.0.0
